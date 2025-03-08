@@ -33,6 +33,7 @@ public class MoveExample : MonoBehaviour
         //transform.Translate(new Vector3(0, 0, 0));
         //transform.Translate(new Vector3(0, 0.1f, 0));
 
+        // ¿Ãµø
         float left = 0.0f;
         if (Input.GetKey(KeyCode.LeftArrow) == true)
         {
@@ -54,6 +55,12 @@ public class MoveExample : MonoBehaviour
         }
         //transform.Translate(new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0));
         transform.Translate(new Vector3(left, right, 0));
+
+        //
+        //transform.position.Set(0, 4, 0); ??
+
+        Debug.Log("position = " + transform.position);
+        Debug.Log("localPosition = " + transform.localPosition);
     }
 
     void LateUpdate()
