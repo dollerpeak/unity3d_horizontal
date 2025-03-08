@@ -45,7 +45,7 @@ public class InputExample : MonoBehaviour
             Debug.Log("마우스 왼쪽 뗄때");
         }
 
-        // Edit > Project Setting > Input Maanger
+        // Edit > Project Setting > Input Manager
         if (Input.GetButtonDown("Horizontal") == true)
         {
             Debug.Log("셋팅된값 누를때, Input.GetAxis: " + Input.GetAxis("Horizontal"));
