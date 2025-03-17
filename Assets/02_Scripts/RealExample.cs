@@ -95,7 +95,8 @@ public class RealExample : MonoBehaviour
     {
         if(collision.gameObject.name.StartsWith("Sphere") == true)
         {
-            Debug.Log("충돌 시작 = " + collision.gameObject.name);
+            //Debug.Log("충돌 시작 = " + collision.gameObject.name);            
+            //material.color = Color.red;
         }
     }
 
@@ -103,7 +104,8 @@ public class RealExample : MonoBehaviour
     {
         if (collision.gameObject.name.StartsWith("Sphere") == true)
         {
-            Debug.Log("충돌 중 = " + collision.gameObject.name);
+            //Debug.Log("충돌 중 = " + collision.gameObject.name);
+            //material.color = Color.red;
         }
     }
 
@@ -111,7 +113,35 @@ public class RealExample : MonoBehaviour
     {
         if (collision.gameObject.name.StartsWith("Sphere") == true)
         {
-            Debug.Log("충돌 종료 = " + collision.gameObject.name);
+            //Debug.Log("충돌 종료 = " + collision.gameObject.name);
+            //material.color = Color.red;
+        }
+    }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        if (collider.gameObject.name == "Cube")
+        {
+            //Debug.Log("Trigger, 충돌 시작 = " + collider.gameObject.name);
+            //transform.Translate(new Vector3(0, 0.1f, 0));
+        }
+    }
+
+    void OnTriggerStay(Collider collider)
+    {
+        if (collider.gameObject.name == "Cube")
+        {
+            //Debug.Log("Trigger, 충돌 중 = " + collider.gameObject.name);
+            //transform.Translate(new Vector3(0, 0.1f, 0));
+            rigidbody.AddForce(Vector3.up, ForceMode.Impulse);
+        }
+    }
+
+    void OnTriggerExit(Collider collider)
+    {
+        if (collider.gameObject.name == "Cube")
+        {
+            //Debug.Log("Trigger, 충돌 종료 = " + collider.gameObject.name);
         }
     }
 
@@ -120,6 +150,11 @@ public class RealExample : MonoBehaviour
 
     }
 
+
+    public void jump()
+    {
+        rigidbody.AddForce(Vector3.up*10, ForceMode.Impulse);
+    }
 
 
 }
