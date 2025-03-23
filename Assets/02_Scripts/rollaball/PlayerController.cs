@@ -1,11 +1,13 @@
 using System;
 using UnityEngine;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
+using UnityEngine.SceneManagement;
 
 public class player : MonoBehaviour
 {
-    public int itemCount = 0;
-
+    [Header("GameManager")]
+    public GameManager gameManager;
+    
+    int itemCount;
     //float moveForce = 2;
     float moveForce = 0.1f;
     Boolean flagJump = false;
@@ -38,6 +40,11 @@ public class player : MonoBehaviour
             flagJump = true;
             rigidBody.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
         }
+
+        if (transform.position.y <= -5.0f)
+        {
+            ReStart();
+        }
     }
 
     void OnCollisionEnter(Collision collision)
@@ -53,10 +60,29 @@ public class player : MonoBehaviour
         if (other.gameObject.tag == "Item")
         {
             itemCount += 1;
-
             audioSource.Play();
+
+            gameManager.setUiNowItemCount(itemCount);
             other.gameObject.SetActive(false);
         }
+        else if (other.gameObject.tag == "Finish")
+        {
+            if (gameManager.GetStageItemCount() == itemCount)
+            {
+                //다음스테이지
+                SceneManager.LoadScene("rollaball_next");
+            }
+            else
+            {
+                //재시작
+                SceneManager.LoadScene(gameManager.GetSceneName());
+            }
+        }
     }
-    
+
+    void ReStart()
+    {
+        SceneManager.LoadScene(gameManager.GetSceneName());
+    }
+
 }
